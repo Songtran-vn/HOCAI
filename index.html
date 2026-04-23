@@ -911,7 +911,7 @@
     <div class="footer-col">
       <h4>Liên hệ</h4>
       <ul class="footer-contact">
-        <li>📞 0974 168 705</li>
+        <li>📞 0966 123 456</li>
         <li>✉️ info@aiofficemastery.vn</li>
         <li>🌐 www.aiofficemastery.vn</li>
       </ul>
@@ -935,7 +935,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 TRẦN ĐỨC SÔNG. All rights reserved.</span>
+    <span>© 2024 AI Office Mastery. All rights reserved.</span>
     <span style="color:#475569">Made with ❤️ in Vietnam</span>
   </div>
 </footer>
@@ -960,7 +960,7 @@
 // ============================================================
 // CẤU HÌNH — thay bằng URL Google Apps Script của bạn
 // ============================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxER34mLbjnGivzxTXNklqUEbApMqItkEvVf9PQYnGbPvHaSVdvsaWpNXI7odNV9sxT/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7JvZJ2HJZjNMUUx4CnPQqrFjOfM7Q7_C_dH_yxo0Iy9d5Bn5Y2qKOTvUhrNb1CU1E/exec';
 
 // ============================================================
 // FORM REGISTER
@@ -989,13 +989,9 @@ async function handleRegister() {
   btn.textContent = '⏳ Đang gửi...';
 
   try {
-    if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxER34mLbjnGivzxTXNklqUEbApMqItkEvVf9PQYnGbPvHaSVdvsaWpNXI7odNV9sxT/exec') {
-      const fd = new FormData();
-      fd.append('name', name);
-      fd.append('phone', phone);
-      fd.append('email', email);
-      fd.append('time', new Date().toLocaleString('vi-VN'));
-      await fetch(SCRIPT_URL, { method: 'POST', body: fd, mode: 'no-cors' });
+    if (SCRIPT_URL && SCRIPT_URL !== 'ĐẶT_URL_APPS_SCRIPT_VÀO_ĐÂY') {
+      const params = new URLSearchParams({ action: 'register', name, phone, email });
+      fetch(SCRIPT_URL + '?' + params.toString()).catch(()=>{});
     }
     // Show success modal
     document.getElementById('success-modal').classList.add('show');
