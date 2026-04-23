@@ -960,7 +960,7 @@
 // ============================================================
 // CẤU HÌNH — thay bằng URL Google Apps Script của bạn
 // ============================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyPwT4IIWYXZ2r56zA4YBGn9ttlG_u-Uh3Bhs2lJe_dKTXEHki-8rxr9RZinBmcDj7_/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxER34mLbjnGivzxTXNklqUEbApMqItkEvVf9PQYnGbPvHaSVdvsaWpNXI7odNV9sxT/exec';
 
 // ============================================================
 // FORM REGISTER
@@ -989,7 +989,7 @@ async function handleRegister() {
   btn.textContent = '⏳ Đang gửi...';
 
   try {
-    if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbyPwT4IIWYXZ2r56zA4YBGn9ttlG_u-Uh3Bhs2lJe_dKTXEHki-8rxr9RZinBmcDj7_/exec') {
+    if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxER34mLbjnGivzxTXNklqUEbApMqItkEvVf9PQYnGbPvHaSVdvsaWpNXI7odNV9sxT/exec') {
       const fd = new FormData();
       fd.append('name', name);
       fd.append('phone', phone);
