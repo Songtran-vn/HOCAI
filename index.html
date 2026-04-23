@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Office Mastery – Thành thạo AI chỉ sau 4 buổi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0ea5e9;
+    --teal-dark: #0284c7;
+    --teal-light: #e0f2fe;
+    --green: #10b981;
+    --green-light: #d1fae5;
+    --orange: #f59e0b;
+    --dark: #0f172a;
+    --dark2: #1e293b;
+    --gray: #64748b;
+    --gray-light: #f1f5f9;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(14,165,233,0.10);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--dark); text-decoration: none; }
+  .nav-logo .logo-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--teal), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 900; font-size: 14px;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--gray); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    color: white; border: none; padding: 10px 22px; border-radius: 10px;
+    font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity .2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { opacity: .88; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; }
+
+  /* HERO */
+  .hero {
+    padding: 120px 24px 80px;
+    background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 50%, #fffbeb 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--teal-light); color: var(--teal-dark);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 13px; font-weight: 700; margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 900; line-height: 1.18;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--teal); }
+  .hero-desc { color: var(--gray); font-size: 17px; margin-bottom: 28px; line-height: 1.7; }
+  .hero-checks { list-style: none; margin-bottom: 36px; display: flex; flex-direction: column; gap: 10px; }
+  .hero-checks li { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; }
+  .check-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .check-icon svg { width: 12px; height: 12px; stroke: white; fill: none; stroke-width: 2.5; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    color: white; border: none; padding: 14px 28px; border-radius: 12px;
+    font-size: 16px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(14,165,233,0.35);
+    transition: transform .2s, box-shadow .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,165,233,0.4); }
+  .btn-secondary {
+    background: white; color: var(--teal); border: 2px solid var(--teal);
+    padding: 12px 24px; border-radius: 12px; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: background .2s, color .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { background: var(--teal); color: white; }
+  .hero-stats {
+    display: flex; gap: 28px; margin-top: 32px; flex-wrap: wrap;
+  }
+  .hero-stat { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray); font-weight: 500; }
+  .hero-stat strong { color: var(--dark); }
+
+  /* HERO RIGHT — Mockup */
+  .hero-mockup {
+    background: white; border-radius: 24px;
+    box-shadow: 0 24px 80px rgba(14,165,233,0.18);
+    padding: 24px; position: relative;
+  }
+  .mockup-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--border);
+  }
+  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .mockup-header span { font-size: 13px; font-weight: 700; color: var(--dark); margin-left: 4px; }
+  .workflow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .workflow-card {
+    background: var(--gray-light); border-radius: 12px; padding: 14px;
+    transition: background .2s;
+  }
+  .workflow-card:hover { background: var(--teal-light); }
+  .wf-icon { font-size: 22px; margin-bottom: 6px; }
+  .wf-label { font-size: 12px; font-weight: 600; color: var(--dark); line-height: 1.3; }
+  .tools-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tool-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    padding: 5px 10px; font-size: 12px; font-weight: 600; color: var(--dark);
+  }
+  .tool-chip .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* SECTION COMMON */
+  section { padding: 72px 24px; }
+  .section-title {
+    text-align: center; font-size: clamp(22px, 3vw, 34px);
+    font-weight: 800; color: var(--dark); margin-bottom: 12px;
+  }
+  .section-sub { text-align: center; color: var(--gray); font-size: 16px; margin-bottom: 48px; }
+  .section-divider {
+    width: 48px; height: 4px; background: linear-gradient(90deg, var(--teal), var(--green));
+    border-radius: 2px; margin: 12px auto 48px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* WHY SECTION */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .why-card {
+    background: white; border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 28px; transition: border-color .2s, box-shadow .2s;
+  }
+  .why-card:hover { border-color: var(--teal); box-shadow: var(--shadow); }
+  .why-icon { font-size: 32px; margin-bottom: 14px; }
+  .why-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .why-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+  /* PAIN SECTION */
+  .pain-section { background: var(--gray-light); }
+  .pain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .pain-card {
+    background: white; border-radius: var(--radius); padding: 24px;
+    text-align: center; border: 1.5px solid var(--border);
+    transition: box-shadow .2s;
+  }
+  .pain-card:hover { box-shadow: var(--shadow); }
+  .pain-emoji { font-size: 36px; margin-bottom: 12px; }
+  .pain-card p { font-size: 14px; font-weight: 600; color: var(--dark2); }
+
+  /* OUTCOME SECTION */
+  .outcome-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .outcome-card {
+    background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
+    border-radius: var(--radius); padding: 28px;
+    border: 1.5px solid var(--teal-light);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .outcome-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .outcome-icon { font-size: 28px; margin-bottom: 14px; }
+  .outcome-card h3 { font-size: 15px; font-weight: 700; color: var(--dark); }
+
+  /* CURRICULUM SECTION */
+  .curriculum-section { background: var(--gray-light); }
+  .curriculum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .curr-card {
+    background: white; border-radius: var(--radius); padding: 28px;
+    border: 1.5px solid var(--border); transition: border-color .2s, box-shadow .2s;
+  }
+  .curr-card:hover { border-color: var(--teal); box-shadow: var(--shadow); }
+  .curr-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .curr-num {
+    width: 40px; height: 40px; border-radius: 12px; font-weight: 900; font-size: 18px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    color: white;
+  }
+  .curr-card:nth-child(1) .curr-num { background: linear-gradient(135deg, var(--teal), var(--teal-dark)); }
+  .curr-card:nth-child(2) .curr-num { background: linear-gradient(135deg, var(--green), #059669); }
+  .curr-card:nth-child(3) .curr-num { background: linear-gradient(135deg, var(--orange), #d97706); }
+  .curr-card:nth-child(4) .curr-num { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .curr-card h3 { font-size: 16px; font-weight: 800; color: var(--dark); }
+  .curr-topics { list-style: none; margin-bottom: 16px; display: flex; flex-direction: column; gap: 7px; }
+  .curr-topics li { font-size: 14px; color: var(--gray); display: flex; align-items: flex-start; gap: 8px; }
+  .curr-topics li::before { content: '•'; color: var(--teal); font-weight: 900; flex-shrink: 0; }
+  .curr-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .curr-tool {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--gray-light); border-radius: 7px; padding: 4px 10px;
+    font-size: 12px; font-weight: 600; color: var(--dark2);
+  }
+
+  /* TOOLS SECTION */
+  .tools-section { background: var(--dark); padding: 72px 24px; }
+  .tools-section .section-title { color: white; }
+  .tools-section .section-sub { color: #94a3b8; }
+  .tools-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+  .tool-logo {
+    background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 16px 28px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 700; color: white;
+    transition: background .2s, border-color .2s;
+  }
+  .tool-logo:hover { background: rgba(14,165,233,0.2); border-color: var(--teal); }
+  .tool-logo span { font-size: 22px; }
+
+  /* WHO SECTION */
+  .who-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .who-card {
+    display: flex; align-items: center; gap: 16px;
+    background: white; border-radius: var(--radius); padding: 22px;
+    border: 1.5px solid var(--border); transition: border-color .2s;
+  }
+  .who-card:hover { border-color: var(--teal); }
+  .who-emoji { font-size: 36px; flex-shrink: 0; }
+  .who-text h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .who-text p { font-size: 13px; color: var(--gray); }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--gray-light); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .review-card {
+    background: white; border-radius: var(--radius); padding: 28px;
+    border: 1.5px solid var(--border); position: relative;
+  }
+  .review-quote { font-size: 40px; color: var(--teal-light); line-height: 1; margin-bottom: 12px; font-weight: 900; }
+  .review-text { font-size: 14px; color: var(--dark2); line-height: 1.75; margin-bottom: 20px; }
+  .review-author { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: white; flex-shrink: 0;
+  }
+  .review-name { font-size: 14px; font-weight: 700; color: var(--dark); }
+  .review-role { font-size: 12px; color: var(--gray); }
+  .stars { color: var(--orange); font-size: 13px; margin-top: 3px; }
+
+  /* PRICING / CTA SECTION */
+  .cta-section {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%);
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 60%);
+    border-radius: 50%;
+  }
+  .cta-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative;
+  }
+  .cta-left h2 { font-size: clamp(24px, 3vw, 38px); font-weight: 900; color: white; margin-bottom: 14px; line-height: 1.25; }
+  .cta-left h2 span { color: var(--teal); }
+  .cta-left p { color: #94a3b8; font-size: 15px; line-height: 1.7; }
+  .price-card {
+    background: white; border-radius: 24px; padding: 36px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  }
+  .price-badge {
+    display: inline-block; background: var(--teal-light); color: var(--teal-dark);
+    font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .price-amount {
+    font-size: 40px; font-weight: 900; color: var(--dark); margin-bottom: 20px;
+  }
+  .price-amount span { font-size: 18px; font-weight: 600; color: var(--gray); }
+  .price-features { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 12px; }
+  .price-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; }
+  .price-features li .chk { color: var(--green); font-size: 16px; }
+
+  /* REGISTER FORM */
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .form-group input {
+    width: 100%; padding: 12px 16px; border: 1.5px solid var(--border);
+    border-radius: 10px; font-size: 15px; font-family: inherit;
+    outline: none; transition: border-color .2s;
+  }
+  .form-group input:focus { border-color: var(--teal); }
+  .form-group input.error { border-color: #ef4444; }
+  .submit-btn {
+    width: 100%; padding: 15px;
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    color: white; border: none; border-radius: 12px;
+    font-size: 17px; font-weight: 800; cursor: pointer;
+    transition: opacity .2s, transform .2s;
+    box-shadow: 0 4px 16px rgba(14,165,233,0.35);
+    margin-top: 4px;
+  }
+  .submit-btn:hover { opacity: .9; transform: translateY(-1px); }
+  .submit-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+  .form-note { text-align: center; font-size: 12px; color: var(--gray); margin-top: 12px; }
+
+  /* SUCCESS MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000; opacity: 0; pointer-events: none; transition: opacity .3s;
+    padding: 24px;
+  }
+  .modal-overlay.show { opacity: 1; pointer-events: all; }
+  .modal {
+    background: white; border-radius: 28px; padding: 48px 40px;
+    max-width: 480px; width: 100%; text-align: center;
+    transform: scale(0.9); transition: transform .3s;
+    box-shadow: 0 32px 100px rgba(0,0,0,0.25);
+  }
+  .modal-overlay.show .modal { transform: scale(1); }
+  .modal-icon { font-size: 64px; margin-bottom: 16px; }
+  .modal h3 { font-size: 26px; font-weight: 900; color: var(--dark); margin-bottom: 12px; }
+  .modal p { color: var(--gray); font-size: 15px; line-height: 1.7; margin-bottom: 28px; }
+  .zalo-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, #1877f2, #0ea5e9);
+    color: white; text-decoration: none; padding: 15px 32px; border-radius: 14px;
+    font-size: 17px; font-weight: 800;
+    box-shadow: 0 4px 16px rgba(14,165,233,0.35);
+    transition: opacity .2s, transform .2s;
+    margin-bottom: 16px;
+  }
+  .zalo-btn:hover { opacity: .9; transform: translateY(-2px); }
+  .modal-close {
+    display: block; color: var(--gray); font-size: 14px; cursor: pointer;
+    background: none; border: none; font-family: inherit; margin-top: 8px;
+  }
+  .modal-close:hover { color: var(--dark); }
+
+  /* FAQ */
+  .faq-section { background: var(--gray-light); }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .faq-item {
+    background: white; border-radius: var(--radius); border: 1.5px solid var(--border);
+    overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; text-align: left; padding: 20px 24px;
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    font-size: 15px; font-weight: 600; color: var(--dark);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-q .arrow { transition: transform .3s; font-size: 18px; color: var(--teal); flex-shrink: 0; }
+  .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-a-inner { padding: 0 24px 20px; font-size: 14px; color: var(--gray); line-height: 1.75; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); color: #94a3b8; padding: 56px 24px 32px;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;
+  }
+  .footer-brand .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .footer-brand .logo-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--teal), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 900; font-size: 14px;
+  }
+  .footer-brand .logo span { font-size: 17px; font-weight: 800; color: white; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
+  .social-links { display: flex; gap: 10px; }
+  .social-links a {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;
+    font-size: 16px; text-decoration: none; transition: background .2s;
+  }
+  .social-links a:hover { background: var(--teal); }
+  .footer-col h4 { font-size: 14px; font-weight: 700; color: white; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .footer-col ul li { font-size: 13px; }
+  .footer-col ul a { color: #94a3b8; text-decoration: none; transition: color .2s; }
+  .footer-col ul a:hover { color: var(--teal); }
+  .footer-contact li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    background: var(--dark); color: white; padding: 14px 20px;
+    border-radius: 12px; font-size: 14px; font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transform: translateY(80px); opacity: 0;
+    transition: transform .3s, opacity .3s;
+    max-width: 320px;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.error { border-left: 4px solid #ef4444; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-mockup { display: none; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .pain-grid { grid-template-columns: 1fr 1fr; }
+    .outcome-grid { grid-template-columns: 1fr 1fr; }
+    .curriculum-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .cta-inner { grid-template-columns: 1fr; gap: 36px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .why-grid, .pain-grid, .outcome-grid, .who-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .hero-stats { gap: 16px; }
+    .hero-btns { flex-direction: column; }
+    .btn-primary, .btn-secondary { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="logo-icon">AI</div>
+      AI Office Mastery
+    </a>
+    <ul class="nav-links">
+      <li><a href="#gioi-thieu">Giới thiệu</a></li>
+      <li><a href="#lo-trinh">Lộ trình</a></li>
+      <li><a href="#hoc-vien">Học viên</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="#dang-ky" onclick="scrollToForm(event)">Đăng ký ngay</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="gioi-thieu">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">🚀 Khai giảng tháng này</div>
+      <h1>Khóa học AI cho dân văn phòng –<br>Thành thạo công cụ cần thiết<br>chỉ sau <span>4 buổi</span></h1>
+      <p class="hero-desc">Học thực chiến, không cần kỹ thuật. Ứng dụng AI ngay vào email, báo cáo, thuyết trình, tìm kiếm thông tin và quản lý công việc.</p>
+      <ul class="hero-checks">
+        <li>
+          <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Tiết kiệm thời gian mỗi ngày
+        </li>
+        <li>
+          <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Dễ học – dễ áp dụng ngay
+        </li>
+        <li>
+          <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+          Có template và prompt mẫu thực chiến
+        </li>
+      </ul>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="scrollToForm()">
+          📋 Xem lộ trình 4 buổi
+        </button>
+        <button class="btn-secondary" onclick="scrollToForm()">
+          📥 Nhận đề cương miễn phí
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">🎯 <strong>4 buổi</strong> thực chiến</div>
+        <div class="hero-stat">⚡ <strong>No-code</strong></div>
+        <div class="hero-stat">📄 <strong>Tài liệu mẫu</strong></div>
+        <div class="hero-stat">💬 <strong>Hỗ trợ</strong> sau khóa học</div>
+      </div>
+    </div>
+    <div class="hero-mockup">
+      <div class="mockup-header">
+        <div class="mockup-dot" style="background:#ef4444"></div>
+        <div class="mockup-dot" style="background:#f59e0b"></div>
+        <div class="mockup-dot" style="background:#10b981"></div>
+        <span>AI Workflow</span>
+      </div>
+      <div class="workflow-grid">
+        <div class="workflow-card">
+          <div class="wf-icon">✉️</div>
+          <div class="wf-label">Viết email nhanh chóng</div>
+        </div>
+        <div class="workflow-card">
+          <div class="wf-icon">📊</div>
+          <div class="wf-label">Tạo báo cáo & tóm tắt</div>
+        </div>
+        <div class="workflow-card">
+          <div class="wf-icon">🎨</div>
+          <div class="wf-label">Làm slide chuyên nghiệp</div>
+        </div>
+        <div class="workflow-card">
+          <div class="wf-icon">🔍</div>
+          <div class="wf-label">Tìm kiếm & tổng hợp thông tin</div>
+        </div>
+      </div>
+      <div class="tools-row">
+        <div class="tool-chip"><div class="dot" style="background:#10b981"></div>ChatGPT</div>
+        <div class="tool-chip"><div class="dot" style="background:#0ea5e9"></div>Gemini</div>
+        <div class="tool-chip"><div class="dot" style="background:#f59e0b"></div>Canva</div>
+        <div class="tool-chip"><div class="dot" style="background:#8b5cf6"></div>Gamma</div>
+        <div class="tool-chip"><div class="dot" style="background:#1e293b"></div>Notion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SECTION -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Vì sao khóa học AI cho dân văn phòng đang tăng mạnh?</h2>
+    <div class="section-divider"></div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">📈</div>
+        <h3>Nhu cầu kỹ năng AI tăng nhanh</h3>
+        <p>Doanh nghiệp ngày càng ưu tiên nhân sự biết ứng dụng AI vào công việc hằng ngày.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⏱️</div>
+        <h3>Người đi làm cần học nhanh – dùng ngay</h3>
+        <p>Thị trường ưu tiên khóa học ngắn, thực hành nhiều, tập trung vào hiệu quả công việc.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h3>Công cụ quá nhiều, cần lộ trình rõ ràng</h3>
+        <p>Học viên cần được chọn đúng công cụ thay vì học lan man không có định hướng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN SECTION -->
+<section class="pain-section">
+  <div class="container">
+    <h2 class="section-title">Dân văn phòng đang gặp những khó khăn gì?</h2>
+    <div class="section-divider"></div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-emoji">😩</div>
+        <p>Mất nhiều thời gian viết email, báo cáo</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-emoji">😵</div>
+        <p>Làm slide chậm, thiếu ý tưởng</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-emoji">🤷</div>
+        <p>Không biết chọn công cụ AI phù hợp</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-emoji">😟</div>
+        <p>Sợ dùng AI sai cách, thiếu hiệu quả</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOME SECTION -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Sau khóa học, bạn làm được gì?</h2>
+    <div class="section-divider"></div>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-icon">✉️</div>
+        <h3>Viết email và nội dung công việc nhanh hơn</h3>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">📋</div>
+        <h3>Tạo báo cáo, tóm tắt tài liệu rõ ràng</h3>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">🎨</div>
+        <h3>Làm slide chuyên nghiệp bằng AI</h3>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">🔍</div>
+        <h3>Tìm kiếm và tổng hợp thông tin hiệu quả</h3>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">⚙️</div>
+        <h3>Tạo quy trình làm việc cá nhân thông minh</h3>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">💡</div>
+        <h3>Biết dùng prompt đúng để ra kết quả tốt</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum-section" id="lo-trinh">
+  <div class="container">
+    <h2 class="section-title">Lộ trình đào tạo 4 buổi</h2>
+    <div class="section-divider"></div>
+    <div class="curriculum-grid">
+      <div class="curr-card">
+        <div class="curr-header">
+          <div class="curr-num">01</div>
+          <h3>Buổi 1: Nền tảng AI & Prompt thực chiến</h3>
+        </div>
+        <ul class="curr-topics">
+          <li>Hiểu tư duy dùng AI trong công việc</li>
+          <li>Cách viết prompt rõ ràng, hiệu quả</li>
+          <li>Thực hành với ChatGPT, Gemini, Copilot</li>
+        </ul>
+        <div class="curr-tools">
+          <div class="curr-tool">🤖 ChatGPT</div>
+          <div class="curr-tool">✨ Gemini</div>
+          <div class="curr-tool">💼 Copilot</div>
+        </div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <div class="curr-num">02</div>
+          <h3>Buổi 2: Email, báo cáo, tài liệu</h3>
+        </div>
+        <ul class="curr-topics">
+          <li>Soạn email chuyên nghiệp bằng AI</li>
+          <li>Viết báo cáo nhanh, đúng trọng tâm</li>
+          <li>Tóm tắt tài liệu và dịch nội dung</li>
+        </ul>
+        <div class="curr-tools">
+          <div class="curr-tool">🤖 ChatGPT</div>
+          <div class="curr-tool">🧠 Claude</div>
+          <div class="curr-tool">🔍 Perplexity</div>
+        </div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <div class="curr-num">03</div>
+          <h3>Buổi 3: Slide, hình ảnh, trình bày</h3>
+        </div>
+        <ul class="curr-topics">
+          <li>Lên ý tưởng thuyết trình</li>
+          <li>Tạo slide bằng AI nhanh và đẹp</li>
+          <li>Thiết kế hình ảnh hỗ trợ công việc</li>
+        </ul>
+        <div class="curr-tools">
+          <div class="curr-tool">🎨 Canva</div>
+          <div class="curr-tool">⚡ Gamma</div>
+          <div class="curr-tool">🤖 ChatGPT</div>
+        </div>
+      </div>
+      <div class="curr-card">
+        <div class="curr-header">
+          <div class="curr-num">04</div>
+          <h3>Buổi 4: Tổ chức công việc & Tự động hóa</h3>
+        </div>
+        <ul class="curr-topics">
+          <li>Quản lý ghi chú thông minh</li>
+          <li>Tạo quy trình làm việc cá nhân</li>
+          <li>Ứng dụng AI cho công việc hằng ngày</li>
+        </ul>
+        <div class="curr-tools">
+          <div class="curr-tool">📝 Notion AI</div>
+          <div class="curr-tool">💼 Copilot</div>
+          <div class="curr-tool">✨ Gemini</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS SECTION -->
+<section class="tools-section">
+  <div class="container">
+    <h2 class="section-title">Các công cụ cần thiết được đào tạo</h2>
+    <p class="section-sub">Tập trung đúng công cụ phổ biến, dễ dùng, phù hợp dân văn phòng.</p>
+    <div class="tools-logos">
+      <div class="tool-logo"><span>🤖</span> ChatGPT</div>
+      <div class="tool-logo"><span>✨</span> Gemini</div>
+      <div class="tool-logo"><span>🧠</span> Claude</div>
+      <div class="tool-logo"><span>💼</span> Copilot</div>
+      <div class="tool-logo"><span>🔍</span> Perplexity</div>
+      <div class="tool-logo"><span>🎨</span> Canva</div>
+      <div class="tool-logo"><span>⚡</span> Gamma</div>
+      <div class="tool-logo"><span>📝</span> Notion AI</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO SECTION -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Khóa học phù hợp với ai?</h2>
+    <div class="section-divider"></div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-emoji">👩‍💼</div>
+        <div class="who-text">
+          <h4>Nhân viên văn phòng muốn tăng năng suất</h4>
+          <p>Áp dụng AI để xử lý email, báo cáo, tài liệu nhanh hơn mỗi ngày.</p>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-emoji">👨‍💼</div>
+        <div class="who-text">
+          <h4>Trưởng nhóm / Quản lý cần tối ưu quy trình</h4>
+          <p>Dùng AI để tối ưu workflow, tự động hóa và tăng hiệu quả team.</p>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-emoji">👥</div>
+        <div class="who-text">
+          <h4>Nhân sự, marketing, sales, admin, trợ lý</h4>
+          <p>Làm việc thông minh hơn với các công cụ AI phù hợp từng ngành.</p>
+        </div>
+      </div>
+      <div class="who-card">
+        <div class="who-emoji">🌱</div>
+        <div class="who-text">
+          <h4>Người mới bắt đầu, không cần nền tảng kỹ thuật</h4>
+          <p>Khóa học thiết kế cho người chưa từng dùng AI, học ngay được.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="hoc-vien">
+  <div class="container">
+    <h2 class="section-title">Phản hồi học viên</h2>
+    <div class="section-divider"></div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">Tôi đã biết cách dùng AI để viết email, làm báo cáo và tiết kiệm rất nhiều thời gian. Khóa học thực chiến, dễ hiểu và dễ áp dụng ngay.</p>
+        <div class="review-author">
+          <div class="avatar" style="background: linear-gradient(135deg, #10b981, #0ea5e9)">L</div>
+          <div>
+            <div class="review-name">Lan Anh</div>
+            <div class="review-role">HR Executive</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">Khóa học dễ hiểu, thực hành nhiều, học xong áp dụng được ngay vào công việc. Rất phù hợp với người bận việc như mình.</p>
+        <div class="review-author">
+          <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444)">M</div>
+          <div>
+            <div class="review-name">Minh Quân</div>
+            <div class="review-role">Sales Admin</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <p class="review-text">Phần hướng dẫn làm slide và tổng hợp thông tin rất hữu ích cho công việc hàng ngày. Thầy dạy nhiệt tình, hỗ trợ sau khóa học rất tốt.</p>
+        <div class="review-author">
+          <div class="avatar" style="background: linear-gradient(135deg, #8b5cf6, #ec4899)">T</div>
+          <div>
+            <div class="review-name">Thu Hà</div>
+            <div class="review-role">Office Manager</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER / PRICING SECTION -->
+<section class="cta-section" id="dang-ky">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <h2>Đăng ký khóa học<br>AI 4 buổi cho<br><span>dân văn phòng</span></h2>
+      <p>Nhận trọn bộ tài liệu, prompt mẫu và hỗ trợ sau khóa học. Điền thông tin để nhận lịch học và link nhóm Zalo ngay!</p>
+    </div>
+    <div class="price-card">
+      <div class="price-badge">Gói tiêu chuẩn</div>
+      <div class="price-amount">2.990.000đ <span>/ khóa</span></div>
+      <ul class="price-features">
+        <li><span class="chk">✅</span> 4 buổi đào tạo thực chiến</li>
+        <li><span class="chk">✅</span> 8+ công cụ cần thiết</li>
+        <li><span class="chk">✅</span> Tài liệu + template đi kèm</li>
+        <li><span class="chk">✅</span> Hỗ trợ hỏi đáp sau khóa học</li>
+        <li><span class="chk">✅</span> Nhóm Zalo học viên</li>
+      </ul>
+      <!-- FORM -->
+      <div class="form-group">
+        <label>Họ và tên *</label>
+        <input type="text" id="field-name" placeholder="Nguyễn Văn A">
+      </div>
+      <div class="form-group">
+        <label>Số điện thoại *</label>
+        <input type="tel" id="field-phone" placeholder="0912 345 678">
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" id="field-email" placeholder="email@gmail.com">
+      </div>
+      <button class="submit-btn" id="submit-btn" onclick="handleRegister()">
+        🚀 Đăng ký & Nhận lịch học ngay
+      </button>
+      <p class="form-note">🔒 Thông tin của bạn được bảo mật tuyệt đối</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <h2 class="section-title">Câu hỏi thường gặp</h2>
+    <div class="section-divider"></div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Tôi chưa biết gì về AI có học được không?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Hoàn toàn có thể! Khóa học được thiết kế dành cho người mới bắt đầu, không yêu cầu kiến thức kỹ thuật. Chỉ cần biết dùng máy tính và email là đủ.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Khóa học có thực hành trên công việc thực tế không?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Có! Mỗi buổi học đều có bài thực hành với các tình huống thực tế như viết email, làm báo cáo, tạo slide. Học viên áp dụng ngay trong buổi học.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Sau khóa học tôi có tài liệu để dùng lại không?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Có, bạn sẽ nhận được trọn bộ slide, prompt mẫu, template thực chiến để dùng lại ngay trong công việc. Tài liệu được cập nhật liên tục.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Doanh nghiệp có thể đặt lịch đào tạo riêng không?
+          <span class="arrow">▼</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Hoàn toàn có! Chúng tôi có gói đào tạo cho doanh nghiệp với nội dung tùy chỉnh phù hợp ngành nghề. Liên hệ hotline để được tư vấn chi tiết.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-icon">AI</div>
+        <span>AI Office Mastery</span>
+      </div>
+      <p>Đào tạo AI ứng dụng cho người đi làm. Thực chiến, không cần kỹ thuật.</p>
+      <div class="social-links">
+        <a href="#">📘</a>
+        <a href="#">📷</a>
+        <a href="#">🎵</a>
+        <a href="#">▶️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Liên hệ</h4>
+      <ul class="footer-contact">
+        <li>📞 0966 123 456</li>
+        <li>✉️ info@aiofficemastery.vn</li>
+        <li>🌐 www.aiofficemastery.vn</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Khóa học</h4>
+      <ul>
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#lo-trinh">Lộ trình 4 buổi</a></li>
+        <li><a href="#dang-ky">Đăng ký tư vấn</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Chính sách</h4>
+      <ul>
+        <li><a href="#">Chính sách bảo mật</a></li>
+        <li><a href="#">Điều khoản sử dụng</a></li>
+        <li><a href="#">Chính sách hoàn tiền</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 AI Office Mastery. All rights reserved.</span>
+    <span style="color:#475569">Made with ❤️ in Vietnam</span>
+  </div>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal">
+    <div class="modal-icon">🎉</div>
+    <h3>Đăng ký thành công!</h3>
+    <p>Cảm ơn bạn đã đăng ký khóa học AI Office Mastery!<br>Nhấn nút bên dưới để vào nhóm Zalo nhận <strong>lịch học và tài liệu miễn phí</strong> ngay nhé!</p>
+    <a class="zalo-btn" href="https://zalo.me/g/t4qzkobj0mcp5whnnugk" target="_blank" rel="noopener">
+      💬 Vào nhóm Zalo ngay
+    </a>
+    <button class="modal-close" onclick="closeModal()">Đóng lại</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// CẤU HÌNH — thay bằng URL Google Apps Script của bạn
+// ============================================================
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyPwT4IIWYXZ2r56zA4YBGn9ttlG_u-Uh3Bhs2lJe_dKTXEHki-8rxr9RZinBmcDj7_/exec';
+
+// ============================================================
+// FORM REGISTER
+// ============================================================
+async function handleRegister() {
+  const name  = document.getElementById('field-name').value.trim();
+  const phone = document.getElementById('field-phone').value.trim();
+  const email = document.getElementById('field-email').value.trim();
+
+  // Validate
+  let hasError = false;
+  ['field-name','field-phone','field-email'].forEach(id => {
+    document.getElementById(id).classList.remove('error');
+  });
+  if (!name)  { document.getElementById('field-name').classList.add('error');  hasError = true; }
+  if (!phone || phone.replace(/\D/g,'').length < 9) {
+    document.getElementById('field-phone').classList.add('error'); hasError = true;
+  }
+  if (!email || !email.includes('@')) {
+    document.getElementById('field-email').classList.add('error'); hasError = true;
+  }
+  if (hasError) { showToast('Vui lòng điền đầy đủ thông tin!', true); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Đang gửi...';
+
+  try {
+    if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbyPwT4IIWYXZ2r56zA4YBGn9ttlG_u-Uh3Bhs2lJe_dKTXEHki-8rxr9RZinBmcDj7_/exec') {
+      const fd = new FormData();
+      fd.append('name', name);
+      fd.append('phone', phone);
+      fd.append('email', email);
+      fd.append('time', new Date().toLocaleString('vi-VN'));
+      await fetch(SCRIPT_URL, { method: 'POST', body: fd, mode: 'no-cors' });
+    }
+    // Show success modal
+    document.getElementById('success-modal').classList.add('show');
+    // Reset form
+    ['field-name','field-phone','field-email'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+  } catch(e) {
+    console.error(e);
+    // Vẫn show modal ngay cả khi lỗi network, không chặn UX
+    document.getElementById('success-modal').classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🚀 Đăng ký & Nhận lịch học ngay';
+  }
+}
+
+function closeModal() {
+  document.getElementById('success-modal').classList.remove('show');
+}
+document.getElementById('success-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ============================================================
+// UTILS
+// ============================================================
+function scrollToForm(e) {
+  if(e) e.preventDefault();
+  document.getElementById('dang-ky').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => { t.className = 'toast'; }, 3000);
+}
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+function toggleMenu() {
+  // Simple mobile menu
+  const links = document.querySelector('.nav-links');
+  if (links) {
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  }
+}
+
+// Enter key on form
+['field-name','field-phone','field-email'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if(e.key === 'Enter') handleRegister();
+  });
+});
+</script>
+</body>
+</html>
