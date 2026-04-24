@@ -1079,7 +1079,7 @@
 // ============================================================
 // CẤU HÌNH — thay bằng URL Google Apps Script của bạn
 // ============================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVz4YnRK95DMe5cCxh5NRRvLy3_vzsVPyqS4I08V6Ou8xPCAxIHzb8gXe2A9F9OdC_/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0Q_q1yAbK3lxlY8MoIMf72JxrBoZu92n3Nb_E9oYuw9U5U4HVQIjOHWMYqTlcouda/exec';
 
 // ============================================================
 // FORM REGISTER
@@ -1108,19 +1108,39 @@ async function handleRegister() {
   btn.textContent = '⏳ Đang gửi...';
 
   try {
-    if (SCRIPT_URL && SCRIPT_URL !== 'ĐẶT_URL_APPS_SCRIPT_VÀO_ĐÂY') {
-      // POST JSON — gửi kèm ảnh bill nếu có
-      const payload = { name, phone, email };
+    if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbyZhVzXvoCfmw5aHSU3iP--fDyKCYex656HX8Ymh8DHu1-gFVOqtzvgtcn8LqF_X91j/exec') {
+      // Dùng hidden form + iframe để bypass CORS hoàn toàn
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden_iframe_' + Date.now();
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = SCRIPT_URL;
+      form.target = iframe.name;
+      form.style.display = 'none';
+
+      const fields = { name, phone, email };
       if (window._billBase64) {
-        payload.bill     = window._billBase64.split(',')[1];
-        payload.billType = window._billBase64.split(';')[0].split(':')[1];
+        fields.bill     = window._billBase64.split(',')[1];
+        fields.billType = window._billBase64.split(';')[0].split(':')[1];
       }
-      fetch(SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        mode: 'no-cors'
-      }).catch(()=>{});
+      for (const [k, v] of Object.entries(fields)) {
+        const input = document.createElement('input');
+        input.type  = 'hidden';
+        input.name  = k;
+        input.value = v;
+        form.appendChild(input);
+      }
+      document.body.appendChild(form);
+      form.submit();
+
+      // Dọn dẹp sau 5 giây
+      setTimeout(() => {
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+      }, 5000);
     }
     // Show success modal
     document.getElementById('success-modal').classList.add('show');
