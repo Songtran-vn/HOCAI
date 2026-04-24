@@ -546,6 +546,7 @@
       <li><a href="#lo-trinh">Lộ trình</a></li>
       <li><a href="#hoc-vien">Học viên</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a href="#" onclick="document.getElementById('tools-modal').classList.add('show');return false;" style="color:var(--teal);font-weight:700;">🛠 Công cụ</a></li>
     </ul>
     <a class="nav-cta" href="#dang-ky" onclick="scrollToForm(event)">Đăng ký ngay</a>
     <div class="hamburger" onclick="toggleMenu()">
@@ -1276,6 +1277,72 @@ function previewFile(input) {
   tick();
   setInterval(tick, 1000);
 })();
+</script>
+
+<!-- TOOLS MODAL -->
+<div id="tools-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.65);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s;padding:24px;">
+  <div style="background:white;border-radius:24px;padding:36px 32px;max-width:560px;width:100%;box-shadow:0 32px 80px rgba(0,0,0,0.25);transform:scale(0.92);transition:transform .3s;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <h3 style="font-size:22px;font-weight:900;color:#0f172a;margin:0;">🛠 Danh sách công cụ tham khảo</h3>
+      <button onclick="document.getElementById('tools-modal').classList.remove('show')" style="background:none;border:none;font-size:24px;cursor:pointer;color:#64748b;line-height:1;">×</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <a href="https://ghinho.vercel.app/" target="_blank" rel="noopener"
+         style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1.5px solid #e2e8f0;border-radius:14px;text-decoration:none;transition:border-color .2s,box-shadow .2s;"
+         onmouseover="this.style.borderColor='#0ea5e9';this.style.boxShadow='0 4px 16px rgba(14,165,233,0.12)'"
+         onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+        <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#0ea5e9,#0284c7);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🧠</div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:3px;">App luyện trí nhớ</div>
+          <div style="font-size:13px;color:#64748b;">Rèn luyện trí nhớ hiệu quả mỗi ngày</div>
+        </div>
+        <div style="margin-left:auto;color:#0ea5e9;font-size:18px;">→</div>
+      </a>
+      <a href="https://100prompttritue2026.vercel.app/" target="_blank" rel="noopener"
+         style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1.5px solid #e2e8f0;border-radius:14px;text-decoration:none;transition:border-color .2s,box-shadow .2s;"
+         onmouseover="this.style.borderColor='#8b5cf6';this.style.boxShadow='0 4px 16px rgba(139,92,246,0.12)'"
+         onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+        <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#8b5cf6,#6d28d9);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">💡</div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:3px;">100 câu lệnh trí tuệ</div>
+          <div style="font-size:13px;color:#64748b;">Bộ 100 prompt AI ứng dụng thực chiến</div>
+        </div>
+        <div style="margin-left:auto;color:#8b5cf6;font-size:18px;">→</div>
+      </a>
+      <a href="https://dayconlamgiau.vercel.app/" target="_blank" rel="noopener"
+         style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1.5px solid #e2e8f0;border-radius:14px;text-decoration:none;transition:border-color .2s,box-shadow .2s;"
+         onmouseover="this.style.borderColor='#f59e0b';this.style.boxShadow='0 4px 16px rgba(245,158,11,0.12)'"
+         onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+        <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📚</div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:3px;">Ôn tập Dạy Con Làm Giàu</div>
+          <div style="font-size:13px;color:#64748b;">Kiến thức tài chính từ bộ sách kinh điển</div>
+        </div>
+        <div style="margin-left:auto;color:#f59e0b;font-size:18px;">→</div>
+      </a>
+      <a href="https://tkt-checkin.vercel.app/" target="_blank" rel="noopener"
+         style="display:flex;align-items:center;gap:16px;padding:18px 20px;border:1.5px solid #e2e8f0;border-radius:14px;text-decoration:none;transition:border-color .2s,box-shadow .2s;"
+         onmouseover="this.style.borderColor='#10b981';this.style.boxShadow='0 4px 16px rgba(16,185,129,0.12)'"
+         onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
+        <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✅</div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:3px;">App quản lý check-in</div>
+          <div style="font-size:13px;color:#64748b;">Quản lý điểm danh sự kiện thông minh</div>
+        </div>
+        <div style="margin-left:auto;color:#10b981;font-size:18px;">→</div>
+      </a>
+    </div>
+    <p style="text-align:center;font-size:12px;color:#94a3b8;margin-top:20px;">Nhấn vào để mở ứng dụng trong tab mới</p>
+  </div>
+</div>
+<style>
+  #tools-modal.show { opacity:1!important; pointer-events:all!important; }
+  #tools-modal.show > div { transform:scale(1)!important; }
+</style>
+<script>
+  document.getElementById('tools-modal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('show');
+  });
 </script>
 </body>
 </html>
