@@ -1109,38 +1109,24 @@ async function handleRegister() {
 
   try {
     if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec') {
-      // Dùng hidden form + iframe để bypass CORS hoàn toàn
-      const iframe = document.createElement('iframe');
-      iframe.name = 'hidden_iframe_' + Date.now();
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = SCRIPT_URL;
-      form.target = iframe.name;
-      form.style.display = 'none';
-
-      const fields = { name, phone, email };
+      // Imgur upload nếu có ảnh, sau đó GET lên Apps Script
+      let billUrl = '';
       if (window._billBase64) {
-        fields.bill     = window._billBase64.split(',')[1];
-        fields.billType = window._billBase64.split(';')[0].split(':')[1];
+        try {
+          const imgRes = await fetch('https://api.imgur.com/3/image', {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Client-ID 546c25a59c58ad7',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ image: window._billBase64.split(',')[1], type: 'base64' })
+          });
+          const imgData = await imgRes.json();
+          if (imgData.success) billUrl = imgData.data.link;
+        } catch(err) { console.error('Imgur:', err); }
       }
-      for (const [k, v] of Object.entries(fields)) {
-        const input = document.createElement('input');
-        input.type  = 'hidden';
-        input.name  = k;
-        input.value = v;
-        form.appendChild(input);
-      }
-      document.body.appendChild(form);
-      form.submit();
-
-      // Dọn dẹp sau 5 giây
-      setTimeout(() => {
-        document.body.removeChild(form);
-        document.body.removeChild(iframe);
-      }, 5000);
+      const params = new URLSearchParams({ name, phone, email, billUrl });
+      fetch(SCRIPT_URL + '?' + params.toString()).catch(()=>{});
     }
     // Show success modal
     document.getElementById('success-modal').classList.add('show');
