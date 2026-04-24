@@ -300,14 +300,34 @@
     box-shadow: 0 24px 80px rgba(0,0,0,0.3);
   }
   .price-badge {
-    display: inline-block; background: var(--teal-light); color: var(--teal-dark);
+    display: inline-block; background: #fef3c7; color: #d97706;
     font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 100px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+  }
+  .price-countdown-bar {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border-radius: 12px; padding: 10px 16px; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .price-countdown-bar .cd-label {
+    font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9); white-space: nowrap;
+  }
+  .price-countdown-bar .cd-timer {
+    font-size: 18px; font-weight: 900; color: white; letter-spacing: 1px; font-variant-numeric: tabular-nums;
+  }
+  .price-original {
+    font-size: 16px; color: var(--gray); text-decoration: line-through;
+    margin-bottom: 4px; font-weight: 500;
   }
   .price-amount {
-    font-size: 40px; font-weight: 900; color: var(--dark); margin-bottom: 20px;
+    font-size: 44px; font-weight: 900; color: #ef4444; margin-bottom: 4px; line-height: 1.1;
   }
   .price-amount span { font-size: 18px; font-weight: 600; color: var(--gray); }
+  .price-saving {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #dcfce7; color: #16a34a; border-radius: 8px;
+    padding: 4px 12px; font-size: 13px; font-weight: 700; margin-bottom: 20px;
+  }
   .price-features { list-style: none; margin-bottom: 28px; display: flex; flex-direction: column; gap: 12px; }
   .price-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; }
   .price-features li .chk { color: var(--green); font-size: 16px; }
@@ -334,6 +354,55 @@
   .submit-btn:hover { opacity: .9; transform: translateY(-1px); }
   .submit-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
   .form-note { text-align: center; font-size: 12px; color: var(--gray); margin-top: 12px; }
+
+
+  /* PAYMENT SECTION */
+  .payment-section {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border: 1.5px solid #bbf7d0; border-radius: 14px;
+    padding: 20px; margin-bottom: 16px;
+  }
+  .payment-title {
+    font-size: 14px; font-weight: 800; color: #065f46;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 6px;
+  }
+  .payment-body { display: flex; gap: 16px; align-items: flex-start; }
+  .payment-qr {
+    width: 110px; height: 110px; border-radius: 10px;
+    border: 2px solid #d1fae5; flex-shrink: 0; object-fit: contain;
+    background: white; padding: 4px;
+  }
+  .payment-info { flex: 1; }
+  .payment-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0; border-bottom: 1px dashed #d1fae5; gap: 8px;
+  }
+  .payment-row:last-child { border-bottom: none; }
+  .payment-row .lbl { font-size: 12px; color: #64748b; white-space: nowrap; }
+  .payment-row .val { font-size: 13px; font-weight: 700; color: #1e293b; text-align: right; }
+  .copy-btn {
+    background: #0ea5e9; color: white; border: none; border-radius: 6px;
+    padding: 2px 8px; font-size: 11px; font-weight: 700; cursor: pointer;
+    transition: background .2s; flex-shrink: 0;
+  }
+  .copy-btn:hover { background: #0284c7; }
+  .upload-section { margin-bottom: 16px; }
+  .upload-label {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px 16px;
+    cursor: pointer; transition: border-color .2s, background .2s; gap: 6px;
+    background: #f8fafc;
+  }
+  .upload-label:hover { border-color: #0ea5e9; background: #f0f9ff; }
+  .upload-label.has-file { border-color: #10b981; background: #f0fdf4; }
+  .upload-icon { font-size: 28px; }
+  .upload-text { font-size: 13px; font-weight: 600; color: #475569; text-align: center; }
+  .upload-sub { font-size: 11px; color: #94a3b8; }
+  #upload-preview {
+    display: none; width: 100%; max-height: 120px; object-fit: contain;
+    border-radius: 8px; margin-top: 8px; border: 1px solid #d1fae5;
+  }
+  #file-upload { display: none; }
 
   /* SUCCESS MODAL */
   .modal-overlay {
@@ -824,8 +893,14 @@
       <p>Nhận trọn bộ tài liệu, prompt mẫu và hỗ trợ sau khóa học. Điền thông tin để nhận lịch học và link nhóm Zalo ngay!</p>
     </div>
     <div class="price-card">
-      <div class="price-badge">Gói tiêu chuẩn</div>
-      <div class="price-amount">2.990.000đ <span>/ khóa</span></div>
+      <div class="price-badge">🔥 Ưu đãi có giới hạn</div>
+      <div class="price-countdown-bar">
+        <span class="cd-label">⏳ Ưu đãi kết thúc sau:</span>
+        <span class="cd-timer" id="countdown">23:59:59</span>
+      </div>
+      <div class="price-original">Giá gốc: 2.990.000đ</div>
+      <div class="price-amount">499.000đ <span>/ khóa</span></div>
+      <div class="price-saving">🎉 Tiết kiệm 2.491.000đ (83%)</div>
       <ul class="price-features">
         <li><span class="chk">✅</span> 4 buổi đào tạo thực chiến</li>
         <li><span class="chk">✅</span> 8+ công cụ cần thiết</li>
@@ -846,8 +921,50 @@
         <label>Email *</label>
         <input type="email" id="field-email" placeholder="email@gmail.com">
       </div>
+      <!-- PAYMENT INFO -->
+      <div class="payment-section">
+        <div class="payment-title">💳 Thông tin chuyển khoản</div>
+        <div class="payment-body">
+          <img class="payment-qr" src="qr-payment.jpg" alt="QR MB Bank">
+          <div class="payment-info">
+            <div class="payment-row">
+              <span class="lbl">Ngân hàng</span>
+              <span class="val">MB Bank</span>
+            </div>
+            <div class="payment-row">
+              <span class="lbl">Chủ TK</span>
+              <span class="val">TRAN DUC SONG</span>
+            </div>
+            <div class="payment-row">
+              <span class="lbl">Số TK</span>
+              <span class="val">0974168705</span>
+              <button class="copy-btn" onclick="copySTK()">Copy</button>
+            </div>
+            <div class="payment-row">
+              <span class="lbl">Số tiền</span>
+              <span class="val" style="color:#ef4444;font-size:14px;">499.000đ</span>
+            </div>
+            <div class="payment-row">
+              <span class="lbl">Nội dung CK</span>
+              <span class="val" id="ck-content" style="font-size:11px;">AI + [Tên + SĐT]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPLOAD BILL -->
+      <div class="upload-section">
+        <label class="upload-label" id="upload-label" for="file-upload">
+          <span class="upload-icon">📸</span>
+          <span class="upload-text">Tải ảnh chuyển khoản lên</span>
+          <span class="upload-sub">JPG, PNG – tối đa 5MB</span>
+          <img id="upload-preview" alt="preview">
+        </label>
+        <input type="file" id="file-upload" accept="image/*" onchange="previewFile(this)">
+      </div>
+
       <button class="submit-btn" id="submit-btn" onclick="handleRegister()">
-        🚀 Đăng ký & Nhận lịch học ngay
+        🚀 Xác nhận đăng ký
       </button>
       <p class="form-note">🔒 Thông tin của bạn được bảo mật tuyệt đối</p>
     </div>
@@ -911,9 +1028,9 @@
     <div class="footer-col">
       <h4>Liên hệ</h4>
       <ul class="footer-contact">
-        <li>📞 0966 123 456</li>
-        <li>✉️ info@aiofficemastery.vn</li>
-        <li>🌐 www.aiofficemastery.vn</li>
+        <li>📞 0974 168 705</li>
+        <li>✉️ tranducsong@gmail.com</li>
+        <li>🌐 www.tranducsong.com</li>
       </ul>
     </div>
     <div class="footer-col">
@@ -960,7 +1077,7 @@
 // ============================================================
 // CẤU HÌNH — thay bằng URL Google Apps Script của bạn
 // ============================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0Q_q1yAbK3lxlY8MoIMf72JxrBoZu92n3Nb_E9oYuw9U5U4HVQIjOHWMYqTlcouda/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyoOZTlDCvsLZDSUzh8rqdy6yjl-1ybixsmxgsxwsHjbgYSldoqd4Y0_yogUiFCRteC/exec';
 
 // ============================================================
 // FORM REGISTER
@@ -990,22 +1107,42 @@ async function handleRegister() {
 
   try {
     if (SCRIPT_URL && SCRIPT_URL !== 'ĐẶT_URL_APPS_SCRIPT_VÀO_ĐÂY') {
-      const params = new URLSearchParams({ action: 'register', name, phone, email });
-      fetch(SCRIPT_URL + '?' + params.toString()).catch(()=>{});
+      // Gửi POST với JSON — kèm ảnh bill nếu có
+      const payload = { name, phone, email };
+      if (window._billBase64) {
+        // Bỏ prefix "data:image/...;base64," chỉ giữ raw base64
+        payload.bill = window._billBase64.split(',')[1];
+        payload.billType = window._billBase64.split(';')[0].split(':')[1]; // image/jpeg
+      }
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      });
     }
     // Show success modal
     document.getElementById('success-modal').classList.add('show');
-    // Reset form
+    // Reset form + bill
     ['field-name','field-phone','field-email'].forEach(id => {
       document.getElementById(id).value = '';
     });
+    window._billBase64 = null;
+    const preview = document.getElementById('upload-preview');
+    if (preview) { preview.style.display='none'; preview.src=''; }
+    const lbl = document.getElementById('upload-label');
+    if (lbl) {
+      lbl.classList.remove('has-file');
+      lbl.querySelector('.upload-text').textContent = 'Tải ảnh chuyển khoản lên';
+      lbl.querySelector('.upload-sub').textContent = 'JPG, PNG – tối đa 5MB';
+    }
+    document.getElementById('file-upload').value = '';
   } catch(e) {
     console.error(e);
-    // Vẫn show modal ngay cả khi lỗi network, không chặn UX
     document.getElementById('success-modal').classList.add('show');
   } finally {
     btn.disabled = false;
-    btn.textContent = '🚀 Đăng ký & Nhận lịch học ngay';
+    btn.textContent = '🚀 Xác nhận đăng ký';
   }
 }
 
@@ -1050,6 +1187,70 @@ function toggleMenu() {
     if(e.key === 'Enter') handleRegister();
   });
 });
+
+
+// ============================================================
+// PAYMENT HELPERS
+// ============================================================
+function copySTK() {
+  navigator.clipboard.writeText('0974168705').then(() => {
+    showToast('✅ Đã copy số tài khoản!');
+  }).catch(() => {
+    showToast('STK: 0974168705');
+  });
+}
+
+function previewFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('Ảnh quá 5MB, vui lòng chọn ảnh nhỏ hơn!', true);
+    input.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const preview = document.getElementById('upload-preview');
+    const label = document.getElementById('upload-label');
+    preview.src = e.target.result;
+    preview.style.display = 'block';
+    label.classList.add('has-file');
+    label.querySelector('.upload-text').textContent = '✅ ' + file.name;
+    label.querySelector('.upload-sub').textContent = (file.size/1024).toFixed(0) + ' KB – Nhấn để đổi ảnh';
+    // store base64 for submission
+    window._billBase64 = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ============================================================
+// COUNTDOWN TIMER — 24h ưu đãi, reset mỗi ngày
+// ============================================================
+(function() {
+  var el = document.getElementById("countdown");
+  if (!el) return;
+  var KEY = "cdExpire";
+  var stored = localStorage.getItem(KEY);
+  var expire;
+  if (stored) {
+    expire = parseInt(stored);
+  } else {
+    expire = Date.now() + 24 * 60 * 60 * 1000;
+    localStorage.setItem(KEY, expire);
+  }
+  function tick() {
+    var diff = Math.max(0, expire - Date.now());
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    el.textContent = String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+    if (diff <= 0) {
+      localStorage.removeItem(KEY);
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
 </script>
 </body>
 </html>
