@@ -1079,7 +1079,7 @@
 // ============================================================
 // CẤU HÌNH — thay bằng URL Google Apps Script của bạn
 // ============================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx43Iy2hm3wveDpTs3xXgWDStpKUoaTW2Wkv3fOziq6YmuZOgHJay9sAZrITA59A0Kg/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec';
 
 // ============================================================
 // FORM REGISTER
@@ -1108,22 +1108,19 @@ async function handleRegister() {
   btn.textContent = '⏳ Đang gửi...';
 
   try {
-    // Upload ảnh bill lên Imgur nếu có
-    let billUrl = '';
-    if (window._billBase64) {
-      try {
-        const ir = await fetch('https://api.imgur.com/3/image', {
-          method: 'POST',
-          headers: { 'Authorization': 'Client-ID 546c25a59c58ad7', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image: window._billBase64.split(',')[1], type: 'base64' })
-        });
-        const id = await ir.json();
-        if (id.success) billUrl = id.data.link;
-      } catch(ie) { console.error('Imgur:', ie); }
-    }
-    // Gửi thông tin + billUrl lên Apps Script
-    const params = new URLSearchParams({ name, phone, email, billUrl });
+    const params = new URLSearchParams({ name, phone, email });
     fetch('https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec?' + params.toString(), { mode: 'no-cors' });
+    // Gửi ảnh bill qua Telegram Bot trực tiếp (không qua Imgur)
+    if (window._billBase64) {
+      const blob = await (await fetch(window._billBase64)).blob();
+      const fd = new FormData();
+      fd.append('chat_id', '5083589789');
+      fd.append('photo', blob, 'bill.jpg');
+      fd.append('caption', '📸 Bill của: ' + name + ' | ' + phone);
+      fetch('https://api.telegram.org/bot8651861573:AAEd2jGxFzT2ubRobnglnE1L4GHquDYkcas/sendPhoto', {
+        method: 'POST', body: fd
+      }).catch(()=>{});
+    }
   } catch(e) {
     console.error(e);
   } finally {
