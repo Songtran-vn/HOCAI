@@ -1089,6 +1089,7 @@ async function handleRegister() {
   const phone = document.getElementById('field-phone').value.trim();
   const email = document.getElementById('field-email').value.trim();
 
+  // Validate
   let hasError = false;
   ['field-name','field-phone','field-email'].forEach(id => {
     document.getElementById(id).classList.remove('error');
@@ -1106,18 +1107,17 @@ async function handleRegister() {
   btn.disabled = true;
   btn.textContent = '⏳ Đang gửi...';
 
-  const SEND_URL = "https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec";
-  const params = new URLSearchParams({ name, phone, email });
-  fetch(SEND_URL + '?' + params.toString()).catch(()=>{});
-
-  document.getElementById('success-modal').classList.add('show');
-  ['field-name','field-phone','field-email'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  btn.disabled = false;
-  btn.textContent = '🚀 Xác nhận đăng ký';
+  try {
+    // Gửi GET no-cors lên Apps Script
+    const params = new URLSearchParams({ name, phone, email });
+    fetch('https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec?' + params.toString(), { mode: 'no-cors' });
+  } catch(e) {
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🚀 Đăng ký & Nhận lịch học ngay';
+  }
 }
-
 
 function closeModal() {
   document.getElementById('success-modal').classList.remove('show');
