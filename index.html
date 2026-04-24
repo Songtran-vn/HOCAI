@@ -1107,25 +1107,31 @@ async function handleRegister() {
   btn.disabled = true;
   btn.textContent = '⏳ Đang gửi...';
 
-  try {
-    const params = new URLSearchParams({ name, phone, email });
-    fetch('https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec?' + params.toString(), { mode: 'no-cors' });
-    // Gửi ảnh bill qua Telegram Bot trực tiếp (không qua Imgur)
-    if (window._billBase64) {
-      const blob = await (await fetch(window._billBase64)).blob();
-      const fd = new FormData();
-      fd.append('chat_id', '5083589789');
-      fd.append('photo', blob, 'bill.jpg');
-      fd.append('caption', '📸 Bill của: ' + name + ' | ' + phone);
-      fetch('https://api.telegram.org/bot8651861573:AAEd2jGxFzT2ubRobnglnE1L4GHquDYkcas/sendPhoto', {
-        method: 'POST', body: fd
-      }).catch(()=>{});
-    }
-  } catch(e) {
-    console.error(e);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '🚀 Đăng ký & Nhận lịch học ngay';
+  // 1. Hiện modal NGAY, không chờ
+  document.getElementById('success-modal').classList.add('show');
+  ['field-name','field-phone','field-email'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  btn.disabled = false;
+  btn.textContent = '🚀 Đăng ký & Nhận lịch học ngay';
+
+  // 2. Gửi dữ liệu ngầm sau
+  const _params = new URLSearchParams({ name, phone, email });
+  fetch('https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec?' + _params.toString(), { mode: 'no-cors' }).catch(()=>{});
+
+  // 3. Gửi ảnh bill thẳng lên Telegram nếu có
+  if (window._billBase64) {
+    (async () => {
+      try {
+        const blob = await (await fetch(window._billBase64)).blob();
+        const fd = new FormData();
+        fd.append('chat_id', '5083589789');
+        fd.append('photo', blob, 'bill.jpg');
+        fd.append('caption', '📸 Bill: ' + name + ' | ' + phone);
+        await fetch('https://api.telegram.org/bot8651861573:AAEd2jGxFzT2ubRobnglnE1L4GHquDYkcas/sendPhoto', { method: 'POST', body: fd });
+      } catch(e) { console.error('TG photo:', e); }
+      window._billBase64 = null;
+    })();
   }
 }
 
