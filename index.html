@@ -1079,7 +1079,7 @@
 // ============================================================
 // CẤU HÌNH — thay bằng URL Google Apps Script của bạn
 // ============================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0Q_q1yAbK3lxlY8MoIMf72JxrBoZu92n3Nb_E9oYuw9U5U4HVQIjOHWMYqTlcouda/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVz4YnRK95DMe5cCxh5NRRvLy3_vzsVPyqS4I08V6Ou8xPCAxIHzb8gXe2A9F9OdC_/exec';
 
 // ============================================================
 // FORM REGISTER
@@ -1109,8 +1109,18 @@ async function handleRegister() {
 
   try {
     if (SCRIPT_URL && SCRIPT_URL !== 'ĐẶT_URL_APPS_SCRIPT_VÀO_ĐÂY') {
-      const params = new URLSearchParams({ action: 'register', name, phone, email });
-      fetch(SCRIPT_URL + '?' + params.toString()).catch(()=>{});
+      // POST JSON — gửi kèm ảnh bill nếu có
+      const payload = { name, phone, email };
+      if (window._billBase64) {
+        payload.bill     = window._billBase64.split(',')[1];
+        payload.billType = window._billBase64.split(';')[0].split(':')[1];
+      }
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      }).catch(()=>{});
     }
     // Show success modal
     document.getElementById('success-modal').classList.add('show');
