@@ -1089,7 +1089,6 @@ async function handleRegister() {
   const phone = document.getElementById('field-phone').value.trim();
   const email = document.getElementById('field-email').value.trim();
 
-  // Validate
   let hasError = false;
   ['field-name','field-phone','field-email'].forEach(id => {
     document.getElementById(id).classList.remove('error');
@@ -1107,42 +1106,18 @@ async function handleRegister() {
   btn.disabled = true;
   btn.textContent = '⏳ Đang gửi...';
 
-  try {
-    if (SCRIPT_URL && SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec') {
-      // Imgur upload nếu có ảnh, sau đó GET lên Apps Script
-      let billUrl = '';
-      if (window._billBase64) {
-        try {
-          const imgRes = await fetch('https://api.imgur.com/3/image', {
-            method: 'POST',
-            headers: {
-              'Authorization': 'Client-ID 546c25a59c58ad7',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ image: window._billBase64.split(',')[1], type: 'base64' })
-          });
-          const imgData = await imgRes.json();
-          if (imgData.success) billUrl = imgData.data.link;
-        } catch(err) { console.error('Imgur:', err); }
-      }
-      const params = new URLSearchParams({ name, phone, email, billUrl });
-      fetch(SCRIPT_URL + '?' + params.toString()).catch(()=>{});
-    }
-    // Show success modal
-    document.getElementById('success-modal').classList.add('show');
-    // Reset form
-    ['field-name','field-phone','field-email'].forEach(id => {
-      document.getElementById(id).value = '';
-    });
-  } catch(e) {
-    console.error(e);
-    // Vẫn show modal ngay cả khi lỗi network, không chặn UX
-    document.getElementById('success-modal').classList.add('show');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '🚀 Đăng ký & Nhận lịch học ngay';
-  }
+  const SEND_URL = "https://script.google.com/macros/s/AKfycbxd-oaVFT5NLNmYUckfUA37koZWUeHCJWNu1oDhYUUzHH5uf7xTX-ZlcjplzUbGbNw/exec";
+  const params = new URLSearchParams({ name, phone, email });
+  fetch(SEND_URL + '?' + params.toString()).catch(()=>{});
+
+  document.getElementById('success-modal').classList.add('show');
+  ['field-name','field-phone','field-email'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  btn.disabled = false;
+  btn.textContent = '🚀 Xác nhận đăng ký';
 }
+
 
 function closeModal() {
   document.getElementById('success-modal').classList.remove('show');
